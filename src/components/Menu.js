@@ -8,8 +8,6 @@ export default function Menu() {
     textDecoration: "underline"
   };
 
-  let activeClassName = "underline";
-
   return (
     <nav>
       <ul>
@@ -24,10 +22,7 @@ export default function Menu() {
         <li>
           <NavLink
             to="/Blog"
-            className={({ isActive }) =>
-              isActive ? activeClassName : undefined
-            }
-          >
+            style={({ isActive }) =>(isActive ? activeStyle : undefined)}>
             Blog
           </NavLink>
         </li>

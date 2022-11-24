@@ -1,19 +1,24 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Article from "./Article"
+import ReactTooltip from 'react-tooltip';
 
 export default function Blog() {
     const [articles, setArticles] = useState([]);
     const [auteur, setAuteur] = useState('');
     const [message, setMessage] = useState('');
-    const [bEnvoyer,setEnvoyer] = useState(true);
     useEffect(() => {
-        axios.get("http://localhost:3003/articles")
-          .then((response) => {
-            setArticles(response.data)
-          });
-      }, []);
-    
+      loadData()
+    }, []);
+
+    const loadData = () =>{
+      axios.get("http://localhost:3003/articles")
+      .then((response) => {
+        setArticles(response.data)
+      });
+    } 
+  
+
     const CreationMessage = (event) => {
         axios.post('http://localhost:3003/articles', {
             author: auteur,
@@ -22,26 +27,19 @@ export default function Blog() {
           })
           .then(function (response) {
             console.log(response);
+            loadData();
+            setAuteur('')
+            setMessage('')
           })
     };
 
     const auteurChange = (event) => {
-        setAuteur(event.target.value);
-        envoyerChange()
+        setAuteur(event.target.value)
       };
 
     const messageChange = (event) => {
-        setMessage(event.target.value);
-        envoyerChange()
+        setMessage(event.target.value)
       };
-
-    const envoyerChange = () =>{
-        if(message.length >=100 & auteur !== ''){
-            setEnvoyer(false)
-        }else{
-            setEnvoyer(true)
-        }
-    }
 
     return (
         <div>
@@ -50,24 +48,29 @@ export default function Blog() {
                 <div className={"articleForm"}>
                     <input className={"articleInput"}
                     type={"text"}
-                    placeholder={"Nom"}
+                    id={"auteur"}
+                    placeholder={"Nom*"}
                     value={auteur}
                     onChange={auteurChange}
+                    required
                     />
                     <textarea className={"articleText"}
                     type={"text"}
-                    placeholder={"Message"}
+                    id={"message"}
+                    placeholder={"Message*"}
                     value={message}
                     onChange={messageChange}
+                    required
                     ></textarea>
-                    <button className={"articleButton"} onClick={CreationMessage} disabled={bEnvoyer}>Envoyer</button>
+                    <button className={"articleButton"} onClick={CreationMessage} disabled={!(message.length >=100 && !!auteur)} data-tip={!(message.length >=100 && !!auteur) ? "Veuillez mettre un titre et un message d'au moins 100 caractères": "" }>Envoyer</button>
                 </div>
             </div>
             <div className={"listeArticle"}>
                 {articles.map((article) => (
-                <Article article={article} />
+                <Article key={article.id} article={article} update={loadData} />
                 ))}
             </div>
+            <ReactTooltip />
         </div>);
 };
   

@@ -35,7 +35,7 @@ export default function Recettes() {
       </div>
       <div className={"listeRecette"}>
         {recettes.map((recette) => (
-          <Recette recette={recette} />
+          <Recette key={recette.idMeal} recette={recette} />
         ))}
       </div>
     </div>

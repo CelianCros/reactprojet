@@ -40,22 +40,44 @@ body{
   .articleForm{
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 600px;
     gap: 10px;
   }
 
+  .articleFormEdit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+  }
+
   .articleInput{
-    width: 592px;
+    width: 100%;
     outline: orange ;
     box-shadow: 2px 2px 2px orange;
   }
 
   .articleText{
+    width: 100%;
     outline: orange;
+    box-shadow: 2px 2px 2px orange;
   }
 
   .articleButton{
+    background-color: orange;
+    border: 1px solid white;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+    width: 200px;
+    align-self: flex-end;
     margin-bottom: 20px;
+  }
+
+  .articleButton:disabled{
+    opacity: 50%;
   }
 
   .form{
@@ -75,6 +97,7 @@ body{
   .listeArticle{
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
   }
 
@@ -88,6 +111,7 @@ body{
   }
 
   .button{
+    width: 100%;
     display: flex;
     justify-content: flex-end;
     gap: 10px;

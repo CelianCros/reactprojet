@@ -87,6 +87,7 @@ export default function Article({ article, update }) {
                         placeholder={"Message*"}
                         value={message}
                         onChange={messageChange}
+                        rows={6}
                         required
                         ></textarea>
                         <div className={"button"}>

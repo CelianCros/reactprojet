@@ -60,6 +60,7 @@ export default function Blog() {
                     placeholder={"Message*"}
                     value={message}
                     onChange={messageChange}
+                    rows={6}
                     required
                     ></textarea>
                     <button className={"articleButton"} onClick={CreationMessage} disabled={!(message.length >=100 && !!auteur)} data-tip={!(message.length >=100 && !!auteur) ? "Veuillez mettre un titre et un message d'au moins 100 caractères": "" }>Envoyer</button>
